@@ -1,0 +1,48 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+
+  <servlet>
+    <servlet-name>UserController</servlet-name>
+    <servlet-class>cn.mvc.session.controller.UserController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserController</servlet-name>
+    <url-pattern>*.udo</url-pattern>
+  </servlet-mapping>
+
+  <welcome-file-list>
+    <welcome-file>login.jsp</welcome-file>
+  </welcome-file-list>
+
+  <!--拦截器的配置文件-->
+  <filter>
+    <filter-name>AutoLoginFilter</filter-name>
+    <filter-class>cn.mvc.session.filter.AutoLoginFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>AutoLoginFilter</filter-name>
+    <url-pattern>/login.jsp</url-pattern>
+  </filter-mapping>
+
+  <filter>
+    <filter-name>IsLoginFilter</filter-name>
+    <filter-class>cn.mvc.session.filter.IsLoginFilter</filter-class>
+    <init-param>
+      <param-name>author</param-name>
+      <param-value>index.jsp,update.jsp,add.jsp,add.udo,query.udo,delete.udo,update.udo,updatedo.udo</param-value>
+    </init-param>
+    <init-param>
+      <param-name>noauthor</param-name>
+      <param-value>login.jsp,login.udo,logout.udo,index.html,error.jsp</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>IsLoginFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+</web-app>
